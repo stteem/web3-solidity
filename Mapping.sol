@@ -8,7 +8,7 @@ pragma solidity 0.8.26;
 // ["alice", "bob", "charlie"]
 // {"alice":true, "bob":true, "charlie":true}
 contract Mapping {
-    mapping(address => uint) public  balances;
+    mapping(address => uint) public balances;
     mapping (address => mapping (address => bool)) public isFriend;
 
     function setValue(uint _value) public {
