@@ -2,6 +2,10 @@
 pragma solidity 0.8.26;
 
 /*
+    
+    Getting Started with Solidity
+    Project: Create a Token
+
        REQUIREMENTS
     1. Your contract will have public variables that store the details about your coin (Token Name, Token Abbrv., Total Supply)
     2. Your contract will have a mapping of addresses to balances (address => uint)
@@ -30,6 +34,7 @@ contract MyToken {
         totalSupply += _amount;
         balances[_address] += _amount;
     }
+
 
     // burn function
     function burn(address _address, uint _amount) public {

@@ -1,28 +1,69 @@
-REMIX DEFAULT WORKSPACE
+# Create a Token
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+This repo contains programs that demonstrate the basic syntax and functionality of the Solidity programming language. The most interesting is a simple "Create a Token" program which demonstrates basic token minting and burning.
 
-This workspace contains 3 directories:
+## Description
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+The contract has a mint function, burn function, checks balances and totalSupply". This program serves as a simple and straightforward introduction to Solidity programming, and can be used as a stepping stone for more complex projects in the future.
 
-SCRIPTS
+## Getting Started
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+### Executing program
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
+Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., Token.sol). Copy and paste the entire code from MyToken.sol into the file:
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
+```javascript
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.26;
+
+contract MyToken {
+
+    // public variables here
+    string public tokenName = "STTEEM";
+    string public tokenAbbrv = "STM";
+    uint public totalSupply = 0;
+
+    // mapping variable here
+    mapping (address => uint) public balances;
+
+    // mint function
+    function mint(address _address, uint _amount) public {
+        totalSupply += _amount;
+        balances[_address] += _amount;
+    }
+
+
+    // burn function
+    function burn(address _address, uint _amount) public {
+        if(balances[_address] >= _amount){
+            balances[_address] -= _amount;
+            totalSupply -= _amount;
+        }
+        else {
+            revert("Not enough balance");
+        }
+    }
+}
+
+```
+
+To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar or use the "ctrl + s" shortcut. Make sure the "Compiler" option is set to "0.8.26" (or another compatible version), and then click on the "Compile MyToken.sol" button.
+
+Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Click on the "Deploy" button.
+
+Once the contract is deployed, you can interact with it by selecting the "MYTOKEN" contract dropdown menu under the "Deployed Contracts" section, and then  calling the mint, burn, and balances functions with wallet address and amount as inputs. Finally, click on the "transact" button to execute the functions.
+
+You can find and copy a wallet address in the "ACCOUNT" section of "DEPLOY & RUN TRANSACTIONS".
+
+## Authors
+
+Uwem Uke  
+[@uwemuke](https://twitter.com/uwemuke)
+
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
